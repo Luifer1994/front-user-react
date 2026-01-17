@@ -1,12 +1,19 @@
 import { Outlet } from "react-router";
 import useTheme from "../hooks/useTheme";
+import useAuthStore from "@/stores/auth";
 import { useEffect } from "react";
-import { Sun, Moon } from "lucide-react";
+import { Sun, Moon, ArrowLeftFromLine } from "lucide-react";
 import { useNavigate } from "react-router";
 
 const MainLayout = () => {
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const { logout } = useAuthStore();
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  };
 
   useEffect(() => {
     if (theme === "dark") {
@@ -29,13 +36,22 @@ const MainLayout = () => {
           />
           <span className="text-xl font-bold text-red-500">App</span>
         </div>
-        <button
-          className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          aria-label="Toggle Theme"
-        >
-          {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+            aria-label="Toggle Theme"
+          >
+            {theme === "light" ? <Moon size={18} /> : <Sun size={18} />}
+          </button>
+          <button
+            className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300 transition-colors"
+            onClick={handleLogout}
+            aria-label="Logout"
+          >
+            <ArrowLeftFromLine size={18} />
+          </button>
+        </div>
       </nav>
       <main className="p-6 max-w-4xl mx-auto">
         <Outlet />

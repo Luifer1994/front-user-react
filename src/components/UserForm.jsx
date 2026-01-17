@@ -27,6 +27,15 @@ const UserForm = ({ onSubmit, user = null, onCancel, isLoading, error }) => {
         className="border rounded p-2 text-black dark:text-white"
         placeholder="Email"
       />
+      {!user && (
+        <input
+          type="password"
+          {...register("password")}
+          className="border rounded p-2 text-black dark:text-white"
+          placeholder="Contraseña"
+        />
+      )}
+
       <button
         type="submit"
         className="bg-primary dark:bg-primary/90 text-white dark:text-black p-2 rounded cursor-pointer hover:bg-primary/80 dark:hover:bg-primary/70 transition-colors"
