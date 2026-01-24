@@ -15,7 +15,11 @@ const UserList = ({ users, isLoading, error, handleEdit, handleDelete }) => {
             key={user.id}
             className="flex items-center justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
           >
-            <span className="text-sm font-medium">{user.name}</span>
+            <div className="flex flex-col gap-1">
+              <span className="text-sm font-medium">{user.name}</span>
+              <span className="text-xs">Total direcciones: {user.addresses.length} 
+              </span>
+            </div>
 
             <div className="flex gap-1">
               <button
